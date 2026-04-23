@@ -1,3 +1,18 @@
+[source.crates-io]
+replace-with = "rsproxy-sparse"
+
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+
+[source.rsproxy-sparse]
+registry = "sparse+https://rsproxy.cn/index/"
+
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+
 [target.x86_64-unknown-linux-gnu]
 rustflags = ["-C", "link-arg=-Wl,--allow-multiple-definition"]
 
@@ -18,6 +33,8 @@ rustflags = "-lc++ -l framework=Accelerate"
 # Use prebuilt NASM objects on Windows (no NASM install needed in CI): https://aws.github.io/aws-lc-rs/requirements/windows.html#prebuilt-nasm-objects
 AWS_LC_SYS_PREBUILT_NASM = "1"
 CMAKE_POLICY_VERSION_MINIMUM = "3.5"
+# OpenBLAS headers/libs for antirez-asr-sys on Windows (relative to workspace root)
+OPENBLAS_PATH = { value = "apps/screenpipe-app-tauri/src-tauri/openblas", relative = true }
 
 # Faster builds - use more threads for codegen
 [build]
